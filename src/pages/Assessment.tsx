@@ -83,6 +83,7 @@ function Quiz() {
                   question.options?.map((option, i) => (
                     <label key={i}>
                       <input
+                      id="option"
                         type="radio"
                         name={`question-${index}`}
                         value={option}
@@ -105,7 +106,7 @@ function Quiz() {
                   <>
                     <label className='input'>
                       <input
-                      
+                      id="option"
                         type="radio"
                         name={`question-${index}`}
                         value="True"
@@ -116,6 +117,7 @@ function Quiz() {
                     </label>
                     <label className='input'>
                       <input
+                      id="option"
                       className='input'
                         type="radio"
                         name={`question-${index}`}
