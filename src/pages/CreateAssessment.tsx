@@ -47,7 +47,7 @@
 
     const handleAddQuestion = () => {
       if (!currentQuestionType || !currentQuestionText || 
-          (currentQuestionType === 'multipleChoice' && currentOptions.some(opt => !opt)) ||
+          (currentQuestionType === 'multipleChoice' &&  (currentOptions.some(opt => !opt) || !currentCorrectAnswer)) ||
           (currentQuestionType === 'trueOrFalse' && !currentCorrectAnswer)) {
         setMessage('Please fill out the question details and options.');
         return;

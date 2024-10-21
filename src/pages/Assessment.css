@@ -219,3 +219,47 @@ textarea:focus {
   text-align: center;
   margin: 1rem 0;
 }
+.input {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+  cursor: pointer;
+  font-size: 1.1rem;
+  color: #4a4a4a;
+  gap: 0.5rem; /* Adds consistent spacing between radio button and label text */
+}
+
+#option {
+  margin: 0; /* Remove default margins */
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+/* True/False specific styles */
+.question label.input {
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.question label.input:hover {
+  background-color: #f0f0f0;
+}
+
+/* Container for true/false options */
+.question .true-false-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+/* Add these to your existing styles */
+input[type="radio"] {
+  margin-right: 8px;
+}
+
+/* Style for the question text */
+#question {
+  margin-bottom: 1rem;
+}
