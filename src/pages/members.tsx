@@ -34,7 +34,7 @@ const TeamSection = () => {
       imageSrc: "AboutUs/aaron.webp" // Replace with actual image path
     },
     {
-      name: "Mr. Ryan Richard Guadana",
+      name: "Sir Ryan Richard Guadana",
       role: "Adviser",
       imageSrc: "AboutUs/adviser.jpg" // Replace with actual image path
     }

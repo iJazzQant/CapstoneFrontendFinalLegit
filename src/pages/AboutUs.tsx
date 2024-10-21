@@ -28,7 +28,7 @@ function AboutUs() {
           Ang grupo ay binubuo nina Justinn Alzona (Web Developer), Kristan
           Domondon (Animator/Artist), Simon Ducusin (Game Developer/Programmer),
           Aaron Flores (Project Manager/Documenter), at ang kanilang adviser na
-          si Mr. Ryan Richard Guadana na nagbigay ng payo, tulong, at
+          si Sir Ryan Richard Guadana na nagbigay ng payo, tulong, at
           inspirasyon sa proyekto.
           <br />
           Mula sa grupong Acoustics, panatilihin nating buhay ang literaturang
