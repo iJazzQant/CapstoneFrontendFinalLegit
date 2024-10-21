@@ -81,9 +81,9 @@ function Quiz() {
 
                 {question.type === 'multipleChoice' && (
                   question.options?.map((option, i) => (
-                    <label key={i}>
+                    <label id="option" key={i}>
                       <input
-                      id="option"
+                      
                         type="radio"
                         name={`question-${index}`}
                         value={option}
