@@ -69,8 +69,10 @@ function Quiz() {
 
   return (
     <div className="Quiz">
-      {userType === 'student' && quiz && (
+       {userType === 'student' && (
         <>
+          {quiz ? (
+            <>
           <h1>{quiz.title}</h1>
           <form>
             {quiz.questions.map((question, index) => (
@@ -131,7 +133,11 @@ function Quiz() {
           </form>
           <p>{message}</p>
         </>
-      )}
+    ) : (
+      <h2>No quiz is currently available. Please check back later.</h2>
+          )}
+          </>
+          )}
 
       {(userType === 'teacher' || userType === 'admin') && quizzes.length > 0 && (
         <>
