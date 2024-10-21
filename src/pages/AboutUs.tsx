@@ -24,7 +24,6 @@ function AboutUs() {
       <div>
         <h1 className="title">Mga Maygawa</h1>
         <TeamSection />
-        <img src="https://placehold.co/600x400" alt="Image" />
         <p className="description">
           Ang grupo ay binubuo nina Justinn Alzona (Web Developer), Kristan
           Domondon (Animator/Artist), Simon Ducusin (Game Developer/Programmer),
