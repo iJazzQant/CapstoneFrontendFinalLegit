@@ -48,7 +48,7 @@ const GenerateCodePage = () => {
       setStudents(response.data); // Store students in state
     } catch (err) {
       console.error('Error fetching students:', err);
-      setError('Failed to fetch students. Please try again.');
+      setError('No Students found for this code.');
     }
   };
 
