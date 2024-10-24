@@ -109,7 +109,7 @@ function Quiz() {
                       id="option"
                         type="radio"
                         name={`question-${index}`}
-                        value="True"
+                        value="true"
                         checked={answers[index] === 'True'}
                         onChange={() => handleAnswerChange(index, 'True')}
                       />
@@ -121,7 +121,7 @@ function Quiz() {
                       className='input'
                         type="radio"
                         name={`question-${index}`}
-                        value="False"
+                        value="false"
                         checked={answers[index] === 'False'}
                         onChange={() => handleAnswerChange(index, 'False')}
                       />
