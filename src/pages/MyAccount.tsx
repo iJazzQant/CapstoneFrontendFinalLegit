@@ -24,7 +24,20 @@ const MyAccount: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-
+  const [isTeacher, setIsTeacher] = useState<boolean>(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const userDetails = getUserDetailsFromToken(token);
+      if (
+        userDetails &&
+        (userDetails.accountType === "teacher" ||
+          userDetails.accountType === "admin")
+      ) {
+        setIsTeacher(true);
+      }
+    }
+  }, []);
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
@@ -36,7 +49,7 @@ const MyAccount: React.FC = () => {
           accountType: details.accountType,
         });
         // Only fetch codes if user is a teacher
-        if (details.accountType === "teacher") {
+        if (details.accountType !== "student") {
           fetchCodes();
         }
       } else {
@@ -46,7 +59,9 @@ const MyAccount: React.FC = () => {
       navigate("/login");
     }
   }, [navigate]);
-
+  if (!isTeacher) {
+    return <h1>Access Denied. This page is for teachers only.</h1>;
+  }
   const fetchCodes = async () => {
     try {
       const response = await api.get("/teacher/codes");
