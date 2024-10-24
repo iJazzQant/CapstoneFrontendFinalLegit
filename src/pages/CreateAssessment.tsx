@@ -46,20 +46,38 @@
     });
 
     const handleAddQuestion = () => {
-      if (!currentQuestionType || !currentQuestionText || 
-          (currentQuestionType === 'multipleChoice' &&  (currentOptions.some(opt => !opt) || !currentCorrectAnswer)) ||
-          (currentQuestionType === 'trueOrFalse' && !currentCorrectAnswer)) {
-        setMessage('Please fill out the question details and options.');
+      if (!currentQuestionType || !currentQuestionText) {
+        setMessage('Please fill out the question type and text.');
         return;
       }
-
+    
+      // Validation for multiple choice questions
+      if (currentQuestionType === 'multipleChoice') {
+        if (currentOptions.some((opt) => !opt)) {
+          setMessage('Please provide all options for the multiple-choice question.');
+          return;
+        }
+    
+        if (!currentCorrectAnswer) {
+          setMessage('Please provide a correct answer for the multiple-choice question.');
+          return;
+        }
+      }
+    
+      // Validation for true/false questions
+      if (currentQuestionType === 'trueOrFalse' && !currentCorrectAnswer) {
+        setMessage('Please provide a correct answer for the true/false question.');
+        return;
+      }
+    
       const newQuestion: Question = {
         type: currentQuestionType,
         question: currentQuestionText,
         options: currentQuestionType === 'multipleChoice' ? currentOptions : undefined,
-        correctAnswer: currentQuestionType !== 'openEnded' ? currentCorrectAnswer : '',
+        // Set correctAnswer for open-ended questions to "Unapplicable" or "OpenEnded"
+        correctAnswer: currentQuestionType === 'openEnded' ? 'Unapplicable' : currentCorrectAnswer,
       };
-
+    
       setQuestions([...questions, newQuestion]);
       setCurrentQuestionText('');
       setCurrentOptions(['', '', '']);
@@ -67,6 +85,8 @@
       setCurrentQuestionType('');
       setMessage('');
     };
+    
+    
 
     const handleRemoveQuestion = (index: number) => {
       const newQuestions = questions.filter((_, i) => i !== index);
