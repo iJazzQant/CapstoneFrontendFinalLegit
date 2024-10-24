@@ -25,43 +25,6 @@ const MyAccount: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const [isTeacher, setIsTeacher] = useState<boolean>(false);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const userDetails = getUserDetailsFromToken(token);
-      if (
-        userDetails &&
-        (userDetails.accountType === "teacher" ||
-          userDetails.accountType === "admin")
-      ) {
-        setIsTeacher(true);
-      }
-    }
-  }, []);
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      const details = getUserDetailsFromToken(token);
-      if (details) {
-        setUserDetails({
-          username: details.username,
-          email: details.email,
-          accountType: details.accountType,
-        });
-        // Only fetch codes if user is a teacher
-        if (details.accountType !== "student") {
-          fetchCodes();
-        }
-      } else {
-        navigate("/login");
-      }
-    } else {
-      navigate("/login");
-    }
-  }, [navigate]);
-  if (!isTeacher) {
-    return <h1>Access Denied. This page is for teachers only.</h1>;
-  }
   const fetchCodes = async () => {
     try {
       const response = await api.get("/teacher/codes");
@@ -86,6 +49,31 @@ const MyAccount: React.FC = () => {
     });
   };
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const details = getUserDetailsFromToken(token);
+      if (details) {
+        setUserDetails({
+          username: details.username,
+          email: details.email,
+          accountType: details.accountType,
+        });
+        // Only fetch codes if user is a teacher
+        if (details.accountType !== "student") {
+          setIsTeacher(true);
+          fetchCodes();
+        }
+      } else {
+        navigate("/login");
+      }
+    } else {
+      navigate("/login");
+    }
+  }, [navigate]);
+  if (!isTeacher) {
+    return <h1>Access Denied. This page is for teachers only.</h1>;
+  }
   if (!userDetails) {
     return <div>Loading...</div>;
   }
