@@ -54,18 +54,28 @@ const Login: React.FC = () => {
   };
 
 
+  const validatePassword = (password: string) => {
+    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+  };
+  
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+  
+    if (!validatePassword(formData.password)) {
+      setMessage('Password must be at least 8 characters long, include uppercase, lowercase, a number, and a special character.');
+      return;
+    }
+  
     if (isLocked) {
       setMessage(`Account is locked. Please try again in ${remainingTime} seconds.`);
       return;
     }
-
+  
     try {
       const endpoint = isLogin ? '/login' : '/register';
       const response = await api.post(endpoint, formData);
-
+  
       if (isLogin && response.data.token) {
         localStorage.setItem('token', response.data.token);
         login(response.data.token, response.data.accountType);
@@ -87,7 +97,7 @@ const Login: React.FC = () => {
       } else {
         setMessage('An unexpected error occurred');
       }
-
+  
       // Lock user if the maximum attempts are reached
       if (attempts + 1 >= MAX_ATTEMPTS) {
         setIsLocked(true);

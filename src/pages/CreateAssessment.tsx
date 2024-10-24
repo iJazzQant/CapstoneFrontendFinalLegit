@@ -57,7 +57,7 @@
         type: currentQuestionType,
         question: currentQuestionText,
         options: currentQuestionType === 'multipleChoice' ? currentOptions : undefined,
-        correctAnswer: currentQuestionType === 'trueOrFalse' ? currentCorrectAnswer : '',
+        correctAnswer: currentQuestionType !== 'openEnded' ? currentCorrectAnswer : '',
       };
 
       setQuestions([...questions, newQuestion]);
@@ -188,6 +188,9 @@
                 </ul>
                 <Typography variant="body1">Correct Answer: {question.correctAnswer}</Typography>
               </Box>
+            )}
+            {question.type === 'trueOrFalse' && (
+              <Typography variant="body1">Correct Answer: {question.correctAnswer}</Typography>
             )}
             <Button
               onClick={() => handleRemoveQuestion(index)}

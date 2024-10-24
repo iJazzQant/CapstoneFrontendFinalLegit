@@ -53,8 +53,8 @@ function Home() {
         <section id="full-width">
           <div className="row">
             <div className="col">
-              <h1 className="title">Teacher's Corner</h1>
-              <img src="https://placehold.co/600x400" alt="Image" style={{width:"80%"}}/>
+              <h1 className="title">Gabay sa Pagtuturo</h1>
+              <img src="Storytelling.webp" alt="Image" style={{width:"80%"}}/>
               <p className="description">
                 <br></br>
                 Mga gabay sa pagtuturo ng mga alamat sa klase.
@@ -66,7 +66,7 @@ function Home() {
                     backgroundColor: "hsl(28, 88%, 62%)",
                     color: "black",
                     fontSize:"1.5rem"
-                  }}>Teacher's Corner</button></NavLink>
+                  }}>Pumasok</button></NavLink>
             </div>
           </div>
         </section>

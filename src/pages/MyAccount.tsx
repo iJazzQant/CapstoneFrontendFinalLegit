@@ -49,7 +49,7 @@ const MyAccount: React.FC = () => {
 
   const fetchCodes = async () => {
     try {
-      const response = await api.get("/codes");
+      const response = await api.get("/teacher/codes");
 
       const data = response.data;
       setCodes(data.codes);
@@ -91,48 +91,51 @@ const MyAccount: React.FC = () => {
         </div>
 
         {userDetails.accountType === "teacher" && (
-          <div className="card">
-            <h1>Codes Generated</h1>
-            <div className="codes-container">
-              {loading ? (
-                <p>Loading codes...</p>
-              ) : error ? (
-                <p className="error-text">{error}</p>
-              ) : codes.length === 0 ? (
-                <p>No codes generated yet.</p>
-              ) : (
-                <div className="codes-list">
-                  <table className="codes-table">
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Created</th>
-                        <th>Status</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {codes.map((code, index) => (
-                        <tr key={index} className={code.isExpired ? "expired" : "active"}>
-                          <td>{code.code}</td>
-                          <td>{formatDate(code.createdAt)}</td>
-                          <td>
-                            {code.isExpired ? (
-                              <span className="status-expired">Expired</span>
-                            ) : (
-                              <span className="status-active">
-                                Active ({Math.floor(code.remainingTime / 60)}h {code.remainingTime % 60}m)
-                              </span>
-                            )}
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+  <div className="card teacher-codes-card">
+    <h1 className="card-title">Generated Codes</h1>
+    
+    <div className="codes-container">
+      {loading ? (
+        <div className="loading-container">
+          <p>Loading codes...</p>
+          <div className="spinner"></div> {/* Optional: Add a spinner here for better user experience */}
+        </div>
+      ) : error ? (
+        <p className="error-text">{error}</p>
+      ) : codes.length === 0 ? (
+        <p className="no-codes-text">No codes have been generated yet.</p>
+      ) : (
+        <table className="codes-table">
+          <thead>
+            <tr>
+              <th>Code</th>
+              <th>Created At</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {codes.map((code, index) => (
+              <tr key={index} className={code.isExpired ? "code-row expired" : "code-row active"}>
+                <td>{code.code}</td>
+                <td>{formatDate(code.createdAt)}</td>
+                <td>
+                  {code.isExpired ? (
+                    <span className="status-badge expired">Expired</span>
+                  ) : (
+                    <span className="status-badge active">
+                      Active ({Math.floor(code.remainingTime / 60)}h {code.remainingTime % 60}m remaining)
+                    </span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+    </div>
+  </div>
+)}
+
 
         {userDetails.accountType === "admin" && (
           <div className="card">
